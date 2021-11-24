@@ -81,7 +81,12 @@ export const login = {
   welcome: 'welcome to join Zhiting pan',
   agree1_1: 'agree to authorize the following information of Zhiting Home (',
   agree1_2: ') to Zhiting pan',
-  auth: 'confirm authorization'
+  auth: 'confirm authorization',
+  protocol: 'Please check to agree to the "User Agreement" and "Privacy Policy" of Zhiting Cloud Disk',
+  checkedText: 'Confirm authorization or login is deemed as consent',
+  agreementUser: '"User Agreement"',
+  agreementPrivacy: '"Privacy Policy"',
+  and: 'and'
 }
 
 export const transer = {

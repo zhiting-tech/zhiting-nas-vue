@@ -12,7 +12,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'globalUploader',
   data() {
-    const self = this
     return {
       uploader: null,
       uploadNum: 0, // 当前上传数
@@ -71,7 +70,6 @@ export default {
         processResponse(response, cbFuction) {
           const res = response ? JSON.parse(response) : {}
           if (res.status !== 0 && res.reason) {
-            self.$toast(res.reason)
             cbFuction(true, res.reason)
           } else {
             cbFuction(false, response)
@@ -238,10 +236,11 @@ export default {
       this.setUploadedList(list)
       this.fileListRemove(file)
     },
-    onFileError(rootFile, file) {
+    onFileError(rootFile, file, message) {
       console.error(rootFile, file)
+      const errMsg = message || '上传失败'
       file.error = true
-      this.$toast('上传失败')
+      this.$toast(errMsg)
     },
     computeHash(file) {
       // 计算哈希

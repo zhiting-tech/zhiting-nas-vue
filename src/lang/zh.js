@@ -81,7 +81,12 @@ export const login = {
   welcome: '欢迎加入智汀网盘',
   agree1_1: '同意将智汀家居（',
   agree1_2: '）的以下信息授权给智汀网盘',
-  auth: '确认授权'
+  auth: '确认授权',
+  protocol: '请勾选同意智汀云盘的《用户协议》与《隐私政策》',
+  checkedText: '确认授权或登录即视为同意',
+  agreementUser: '《用户协议》',
+  agreementPrivacy: '《隐私政策》',
+  and: '与'
 }
 
 export const transer = {

@@ -13,8 +13,11 @@
               <div class="home-name one-line" @click="onClickLeft()">{{ folderName }}</div>
             </h3>
             <div v-if="write" class="right-part">
+              <van-badge :content="uploadList.length ? uploadList.length : ''">
+                <div class="op-item op-1" @click="toTransmission"/>
+              </van-badge>
               <div class="op-item op-2" @click="creatFile()"/>
-              <UploadMenu :path="filePath"/>
+              <UploadMenu class="op-item" :path="filePath"/>
             </div>
           </div>
         </div>
@@ -140,7 +143,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['uploadedList', 'folderPass']),
+    ...mapGetters(['uploadList', 'uploadedList', 'folderPass']),
     // 文件夹权限
     powers() {
       const power = {
@@ -218,6 +221,12 @@ export default {
       } else {
         this.$router.go(-1)
       }
+    },
+    // 去传输列表页
+    toTransmission() {
+      this.$router.push({
+        name: 'transmission'
+      })
     },
     creatFile() {
       this.showCreat = true
@@ -422,7 +431,10 @@ export default {
   width: 0.56rem;
   height: 0.56rem;
   background-size: 100% 100%;
-  margin-right: .3rem;
+  margin-left: .3rem;
+}
+.op-1 {
+  background-image: url(../../assets/trans-btn.png);
 }
 .op-2 {
   background-image: url(../../assets/add-folder-btn.png);
