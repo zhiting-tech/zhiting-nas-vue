@@ -2,9 +2,9 @@ const path = require('path')
 
 const resolve = dir => path.join(__dirname, dir)
 // 远程代理Ip
-// const baseUrl = 'https://sa.zhitingtech.com'
+// const baseUrl = 'http://192.168.22.131:8090'
 // const baseUrl = 'http://yapi.yctc.tech/mock/77'
-const baseUrl = 'http://192.168.22.123:9020'
+const baseUrl = 'http://192.168.22.245:9020'
 
 // 输出文件夹 智能输出为dist 插件输出为yeelight
 const outputDir = process.env.PLUGIN_NAME ? 'plugin' : 'dist'

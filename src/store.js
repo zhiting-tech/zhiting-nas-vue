@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { fileIconSrc } from './config/file-icon'
+import { getFileType, getFileIcon } from './config/file-icon'
 import * as methods from './utils/common'
 
 Vue.use(Vuex)
@@ -56,15 +56,19 @@ export default new Vuex.Store({
     },
     setUploadList({ commit }, list) {
       list.forEach((file) => {
-        const type = methods.default.getFileType(file.name)
-        file.icon = fileIconSrc[type] || fileIconSrc.gho
+        const type = methods.default.getSuffix(file.name)
+        file.icon = getFileIcon(type) || getFileIcon('gho')
       })
       commit('setUploadList', list)
     },
     setUploadedList({ commit }, list) {
       list.forEach((file) => {
-        const type = methods.default.getFileType(file.name)
-        file.icon = fileIconSrc[type] || fileIconSrc.gho
+        file.suffix = methods.default.getSuffix(file.name)
+        file.icon = getFileIcon(file.suffix) || getFileIcon('gho')
+        if (file.thumbnail_url) {
+          file.poster = `/api/plugin/wangpan/${file.thumbnail_url}`
+        }
+        file.fileType = getFileType(file.suffix)
       })
       commit('setUploadedList', list)
     },

@@ -152,7 +152,7 @@ export default {
    * 获取文件格式
    * @param { filename } 文件名称
    */
-  getFileType(fileName) {
+  getSuffix(fileName) {
     const index1 = fileName.lastIndexOf('.')
     const index2 = fileName.length
     const type = fileName.substring(index1, index2)

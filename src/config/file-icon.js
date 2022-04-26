@@ -8,243 +8,110 @@ const musicIcon = require('../assets/file-icon/music.png')
 const pdfIcon = require('../assets/file-icon/pdf.png')
 const pptIcon = require('../assets/file-icon/ppt.png')
 const txtIcon = require('../assets/file-icon/txt.png')
+// eslint-disable-next-line
 const videoIcon = require('../assets/file-icon/video.png')
 const zipIcon = require('../assets/file-icon/zip.png')
 
-export const fileIconSrc = {
-  doc: docIcon,
-  docx: docIcon,
-  dot: docIcon,
-  dotx: docIcon,
-  docm: docIcon,
-  xls: excelIcon,
-  xlsx: excelIcon,
-  ppt: pptIcon,
-  pptx: pptIcon,
-  png: imgIcon,
-  jpg: imgIcon,
-  jpeg: imgIcon,
-  gif: imgIcon,
-  webp: imgIcon,
-  bmp: imgIcon,
-  ico: imgIcon,
-  dc3: imgIcon,
-  dcm: imgIcon,
-  dib: imgIcon,
-  dic: imgIcon,
-  eps: imgIcon,
-  icb: imgIcon,
-  iff: imgIcon,
-  j2c: imgIcon,
-  j2k: imgIcon,
-  jp2: imgIcon,
-  jpc: imgIcon,
-  jpf: imgIcon,
-  jps: imgIcon,
-  jpx: imgIcon,
-  mpo: imgIcon,
-  pam: imgIcon,
-  pbm: imgIcon,
-  pcx: imgIcon,
-  pdd: imgIcon,
-  pdp: imgIcon,
-  pfm: imgIcon,
-  pgm: imgIcon,
-  pnm: imgIcon,
-  ppm: imgIcon,
-  psb: imgIcon,
-  psd: imgIcon,
-  psdt: imgIcon,
-  pxr: imgIcon,
-  raw: imgIcon,
-  rle: imgIcon,
-  sct: imgIcon,
-  tdi: imgIcon,
-  tga: imgIcon,
-  tif: imgIcon,
-  tiff: imgIcon,
-  vda: imgIcon,
-  vst: imgIcon,
-  folder: folderIcon,
-  gho: ghoIcon,
-  mp3: musicIcon,
-  ape: musicIcon,
-  flac: musicIcon,
-  ogg: musicIcon,
-  aac: musicIcon,
-  wav: musicIcon,
-  mod: musicIcon,
-  ac3: musicIcon,
-  aif: musicIcon,
-  aifc: musicIcon,
-  aiff: musicIcon,
-  amr: musicIcon,
-  caf: musicIcon,
-  cda: musicIcon,
-  fiv: musicIcon,
-  m4a: musicIcon,
-  m4b: musicIcon,
-  mid: musicIcon,
-  oga: musicIcon,
-  ra: musicIcon,
-  sf2: musicIcon,
-  sfark: musicIcon,
-  voc: musicIcon,
-  weba: musicIcon,
-  wma: musicIcon,
-  pdf: pdfIcon,
-  txt: txtIcon,
-  mp4: videoIcon,
-  mov: videoIcon,
-  avi: videoIcon,
-  rmvb: videoIcon,
-  rm: videoIcon,
-  flv: videoIcon,
-  '3gp': videoIcon,
-  asf: videoIcon,
-  m2ts: videoIcon,
-  m4v: videoIcon,
-  mkv: videoIcon,
-  movie: videoIcon,
-  mpeg: videoIcon,
-  mpg: videoIcon,
-  ram: videoIcon,
-  vob: videoIcon,
-  webm: videoIcon,
-  wmv: videoIcon,
-  zip: zipIcon,
-  rar: zipIcon,
-  arj: zipIcon,
-  z: zipIcon,
-  0: zipIcon,
-  '000': zipIcon,
-  '001': zipIcon,
-  '7z': zipIcon,
-  ace: zipIcon,
-  ain: zipIcon,
-  alz: zipIcon,
-  apz: zipIcon,
-  ar: zipIcon,
-  arc: zipIcon,
-  ari: zipIcon,
-  axx: zipIcon,
-  bh: zipIcon,
-  bhx: zipIcon,
-  boo: zipIcon,
-  bz: zipIcon,
-  bz2: zipIcon,
-  bza: zipIcon,
-  c00: zipIcon,
-  c01: zipIcon,
-  c02: zipIcon,
-  cab: zipIcon,
-  car: zipIcon,
-  cbr: zipIcon,
-  cbz: zipIcon,
-  cp9: zipIcon,
-  cpgz: zipIcon,
-  cpt: zipIcon,
-  dar: zipIcon,
-  dd: zipIcon,
-  dgc: zipIcon,
-  efw: zipIcon,
-  f: zipIcon,
-  gca: zipIcon,
-  gz: zipIcon,
-  ha: zipIcon,
-  hbc: zipIcon,
-  hbc2: zipIcon,
-  hbe: zipIcon,
-  hki: zipIcon,
-  hki1: zipIcon,
-  hki2: zipIcon,
-  hki3: zipIcon,
-  hpk: zipIcon,
-  hyp: zipIcon,
-  ice: zipIcon,
-  imp: zipIcon,
-  ipk: zipIcon,
-  ish: zipIcon,
-  jar: zipIcon,
-  jgz: zipIcon,
-  jic: zipIcon,
-  kgb: zipIcon,
-  kz: zipIcon,
-  lbr: zipIcon,
-  lha: zipIcon,
-  lnx: zipIcon,
-  lqr: zipIcon,
-  lz4: zipIcon,
-  lzh: zipIcon,
-  lzm: zipIcon,
-  lzma: zipIcon,
-  lzo: zipIcon,
-  lzx: zipIcon,
-  md: zipIcon,
-  mint: zipIcon,
-  mou: zipIcon,
-  mpkg: zipIcon,
-  mzp: zipIcon,
-  nz: zipIcon,
-  p7m: zipIcon,
-  package: zipIcon,
-  pae: zipIcon,
-  pak: zipIcon,
-  paq6: zipIcon,
-  paq7: zipIcon,
-  paq8: zipIcon,
-  par: zipIcon,
-  par2: zipIcon,
-  pbi: zipIcon,
-  pcv: zipIcon,
-  pea: zipIcon,
-  pf: zipIcon,
-  pim: zipIcon,
-  pit: zipIcon,
-  piz: zipIcon,
-  puz: zipIcon,
-  pwa: zipIcon,
-  qda: zipIcon,
-  r00: zipIcon,
-  r01: zipIcon,
-  r02: zipIcon,
-  r03: zipIcon,
-  rk: zipIcon,
-  rnc: zipIcon,
-  rpm: zipIcon,
-  rte: zipIcon,
-  rz: zipIcon,
-  rzs: zipIcon,
-  s00: zipIcon,
-  s01: zipIcon,
-  s02: zipIcon,
-  s7z: zipIcon,
-  sar: zipIcon,
-  sdn: zipIcon,
-  sea: zipIcon,
-  sfs: zipIcon,
-  sfx: zipIcon,
-  sh: zipIcon,
-  shar: zipIcon,
-  shk: zipIcon,
-  shr: zipIcon,
-  sit: zipIcon,
-  sitx: zipIcon,
-  spt: zipIcon,
-  sqx: zipIcon,
-  sqz: zipIcon,
-  tar: zipIcon,
-  taz: zipIcon,
-  tbz: zipIcon,
-  tbz2: zipIcon,
-  tgz: zipIcon,
-  tlz: zipIcon,
-  tlz4: zipIcon,
-  txz: zipIcon,
-  uc2: zipIcon,
-  foldershare: folderShareIcon
+export const getFileType = (suffix) => {
+  const doc = ['doc', 'docx', 'dot', 'dotx', 'docm']
+  const excel = ['xls', 'xlsx']
+  const ppt = ['ppt', 'pptx']
+  const image = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp', 'ico', 'dc3', 'dcm', 'dib', 'dic', 'eps', 'icb', 'iff', 'j2c', 'j2k', 'jp2', 'jpc', 'jpf', 'jps', 'jpx',
+    'mpo', 'pam', 'pbm', 'pcx', 'pdd', 'pdp', 'pfm', 'pgm', 'pnm', 'ppm', 'psb', 'psd', 'psdt', 'pxr', 'raw', 'rle', 'sct', 'tdi', 'tga', 'tif', 'tiff', 'vda', 'vst', 'heic']
+  const folder = ['folder']
+  const gho = ['gho']
+  const mp3 = ['mp3', 'ape', 'flac', 'ogg', 'aac', 'wav', 'mod', 'ac3', 'aif', 'aifc', 'aiff', 'amr', 'caf', 'cda', 'fiv', 'm4a', 'm4b', 'mid', 'oga',
+    'ra', 'sf2', 'sfark', 'voc', 'weba', 'wma']
+  const video = ['mp4', 'mov', 'avi', 'rmvb', 'rm', 'flv', '3gp', 'asf', 'm2ts', 'm4v', 'mkv', 'movie', 'mpeg', 'mpg', 'ram', 'vob', 'webm', 'wmv']
+  const pdf = ['pdf']
+  const txt = ['txt']
+  const zip = ['zip', 'rar', 'arj', 'z', '0', '000', '001', '7z', 'ace', 'ain', 'alz', 'apz', 'ar', 'arc', 'ari', 'axx', 'bh', 'bhx', 'boo', 'bz', 'bz2', 'bza', 'c00',
+    'c01', 'c02', 'cab', 'car', 'cbr', 'cbz', 'cp9', 'cpgz', 'cpt', 'dar', 'dd', 'dgc', 'efw', 'f', 'gca', 'gz', 'ha', 'hbc', 'hbc2', 'hbe', 'hki', 'hki1', 'hki2', 'hki3',
+    'hpk', 'hyp', 'ice', 'imp', 'ipk', 'ish', 'jar', 'jgz', 'jic', 'kgb', 'kz', 'lbr', 'lha', 'lnx', 'lqr', 'lz4', 'lzh', 'lzm', 'lzma', 'lzo', 'lzx', 'md', 'mint', 'mou',
+    'mpkg', 'mzp', 'nz', 'p7m', 'package', 'pae', 'pak', 'paq6', 'paq7', 'paq8', 'par', 'par2', 'pbi', 'pcv', 'pea', 'pf', 'pim', 'pit', 'piz', 'puz', 'pwa', 'qda', 'r00',
+    'r01', 'r02', 'r03', 'rk', 'rnc', 'rpm', 'rte', 'rz', 'rzs', 's00', 's01', 's02', 's7z', 'sar', 'sdn', 'sea', 'sfs', 'sfx', 'sh', 'shar', 'shk', 'shr', 'sit', 'sitx',
+    'spt', 'sqx', 'sqz', 'tar', 'taz', 'tbz', 'tbz2', 'tgz', 'tlz', 'tlz4', 'txz', 'uc2']
+  const share = ['foldershare']
+  if (doc.includes(suffix)) {
+    return 'doc'
+  }
+  if (excel.includes(suffix)) {
+    return 'excel'
+  }
+  if (ppt.includes(suffix)) {
+    return 'ppt'
+  }
+  if (image.includes(suffix)) {
+    return 'image'
+  }
+  if (folder.includes(suffix)) {
+    return 'folder'
+  }
+  if (gho.includes(suffix)) {
+    return 'gho'
+  }
+  if (mp3.includes(suffix)) {
+    return 'mp3'
+  }
+  if (video.includes(suffix)) {
+    return 'video'
+  }
+  if (pdf.includes(suffix)) {
+    return 'pdf'
+  }
+  if (txt.includes(suffix)) {
+    return 'txt'
+  }
+  if (zip.includes(suffix)) {
+    return 'zip'
+  }
+  if (share.includes(suffix)) {
+    return 'share'
+  }
+  return ''
+}
+
+export const getFileIcon = (suffix) => {
+  const type = getFileType(suffix)
+  if (type === 'doc') {
+    return docIcon
+  }
+  if (type === 'excel') {
+    return excelIcon
+  }
+  if (type === 'ppt') {
+    return pptIcon
+  }
+  if (type === 'image') {
+    return imgIcon
+  }
+  if (type === 'folder') {
+    return folderIcon
+  }
+  if (type === 'gho') {
+    return ghoIcon
+  }
+  if (type === 'mp3') {
+    return musicIcon
+  }
+  if (type === 'video') {
+    return videoIcon
+  }
+  if (type === 'pdf') {
+    return pdfIcon
+  }
+  if (type === 'txt') {
+    return txtIcon
+  }
+  if (type === 'zip') {
+    return zipIcon
+  }
+  if (type === 'share') {
+    return folderShareIcon
+  }
+  return ghoIcon
 }
 
 export default {
-  fileIconSrc
+  getFileIcon
 }

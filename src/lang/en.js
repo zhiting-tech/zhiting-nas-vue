@@ -13,6 +13,7 @@ export const global = {
   moving: 'moving',
   copyTo: 'copyTo',
   copying: 'copying',
+  check: 'check',
   rename: 'rename',
   delete: 'delete',
   cancel: 'cancel',

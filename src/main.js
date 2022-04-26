@@ -26,7 +26,12 @@ import {
   Radio,
   RadioGroup,
   Popover,
-  Form
+  Form,
+  ImagePreview,
+  Slider,
+  Swipe,
+  SwipeItem,
+  SwipeCell
 } from 'vant'
 import Cookies from 'js-cookie'
 import i18n from './lang/index' // 多语言
@@ -68,6 +73,11 @@ Vue.use(Tabbar)
   .use(RadioGroup)
   .use(Popover)
   .use(Form)
+  .use(ImagePreview)
+  .use(Slider)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(SwipeCell)
 
 Vue.component('WeakNetwork', WeakNetwork)
 Vue.component('Loading', CommonLoading)

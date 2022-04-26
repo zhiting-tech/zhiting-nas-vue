@@ -63,7 +63,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { fileIconSrc } from '@/config/file-icon'
+import { getFileIcon } from '@/config/file-icon'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
 const empty = require('@/assets/empty-files.png')
@@ -136,9 +136,9 @@ export default {
       list.forEach((item) => {
         // 我的家的文件不能删除和重命名
         if (item.from_user) {
-          item.icon = fileIconSrc.foldershare
+          item.icon = getFileIcon('foldershare')
         } else {
-          item.icon = fileIconSrc.folder
+          item.icon = getFileIcon('folder')
           item.noDelete = true
           item.noRename = true
         }

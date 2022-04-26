@@ -63,7 +63,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { fileIconSrc } from '@/config/file-icon'
+import { getFileIcon } from '@/config/file-icon'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import PasswordVerify from '@/components/PasswordVerify.vue'
 
@@ -218,10 +218,10 @@ export default {
           }
         }
         if (item.type === 0) {
-          item.icon = fileIconSrc.folder
+          item.icon = getFileIcon('folder')
         } else {
-          item.suffix = this.$methods.getFileType(item.name) || 'gho'
-          item.icon = fileIconSrc[item.suffix] || fileIconSrc.gho
+          item.suffix = this.$methods.getSuffix(item.name) || 'gho'
+          item.icon = getFileIcon(item.suffix) || getFileIcon('gho')
         }
         return item
       })

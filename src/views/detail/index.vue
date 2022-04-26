@@ -41,13 +41,19 @@
             :finished-text="$t('global.noMore')"
             @load="moreLoad">
             <div class="file-list">
-              <div
-                v-for="(item,index) in list"
-                :key="index"
-                class="item-file"
-                @click="manageFile(item)">
+              <div v-for="(item, index) in list" :key="index" class="item-file" @click="manageFile(item)">
                 <div class="file-icon">
-                  <van-image :src="item.icon"/>
+                  <van-image
+                    v-if="item.poster"
+                    :src="item.poster"
+                    class="poster">
+                    <van-icon v-if="item.fileType === 'video'" name="play" color="#ffffff" size="0.24rem" class="play-icon"/>
+                    <template v-slot:error><van-image :src="item.icon"></van-image></template>
+                  </van-image>
+                  <van-image
+                    v-else
+                    :src="item.icon">
+                  </van-image>
                 </div>
                 <div class="file-info">
                   <div class="title one-line"><span>{{item.name}}</span></div>
@@ -84,7 +90,8 @@
       :params="manageData"
       :path="filePath"
       :breadcrumb="breadcrumb"
-      @onSuccess="getFileList(filePath)"/>
+      @onSuccess="getFileList(filePath)"
+      @previewImage="previewImage"/>
     <!--分享-->
     <Operation
       v-model="isShowOperation"
@@ -92,28 +99,35 @@
       :path="filePath"
       :breadcrumb="breadcrumb"
       @onSuccess="getFileList(filePath)"/>
+    <!--图片预览-->
+    <ImagePreview
+      v-model="imgaePreviewShow"
+      :images="images"
+      :startPosition="startPosition"/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { fileIconSrc } from '@/config/file-icon'
+import { getFileType, getFileIcon } from '@/config/file-icon'
 import UploadMenu from '@/components/GlobalUpload/menu.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import ManageFile from '@/components/ManageFile.vue'
 import creatFile from '@/components/CreatFile.vue'
+import ImagePreview from '@/components/ImagePreview'
 
 const empty = require('@/assets/empty-files.png')
 const activeIcon = require('@/assets/radio-active.png')
 const inactiveIcon = require('@/assets/radio.png')
 
 export default {
-  name: 'home',
+  name: 'detail',
   components: {
     UploadMenu,
     Breadcrumb,
     creatFile,
-    ManageFile
+    ManageFile,
+    ImagePreview
   },
   data() {
     return {
@@ -139,7 +153,9 @@ export default {
       manageData: {},
       deleteShow: false,
       isShowOperation: false,
-      write: false
+      write: false,
+      imgaePreviewShow: false, // 是否显示图片预览
+      startPosition: ''
     }
   },
   computed: {
@@ -166,6 +182,10 @@ export default {
     folderName() {
       const last = this.breadcrumb[this.breadcrumb.length - 1]
       return last ? last.name : ''
+    },
+    images() {
+      const res = this.list.filter(item => getFileType(item.suffix) === 'image')
+      return res
     }
   },
   watch: {
@@ -236,19 +256,41 @@ export default {
         path: this.filePath
       }
     },
-    manageFile(params) {
-      if (params.type === 0) {
+    manageFile(file) {
+      // 预览文件限制
+      const whiteList = ['image', 'mp3', 'video', 'txt', 'pdf']
+      if (file.type === 0) {
         this.list = []
-        const same = this.breadcrumb.find(item => item.path === params.path)
+        const same = this.breadcrumb.find(item => item.path === file.path)
         if (same) {
           return
         }
-        this.breadcrumb.push(params)
-        this.getFileList(params.path)
-      } else {
-        this.manageData = params
+        this.breadcrumb.push(file)
+        this.getFileList(file.path)
+      } else if (file.size > 10 * 1024 * 1024 || !whiteList.includes(getFileType(file.suffix))) {
+        // 判断文件是否小于10M 小于10M直接直接查看预览
+        this.manageData = file
         this.showManage = true
+      } else if (getFileType(file.suffix) === 'image') {
+        // 如果是图片直接调用图片预览组件
+        this.previewImage(file.name)
+      } else {
+        // 跳转至预览页
+        this.$router.push({
+          name: 'preview',
+          query: {
+            path: file.path,
+            type: getFileType(file.suffix),
+            name: file.name,
+            id: file.id
+          }
+        })
       }
+    },
+    // 图片预览
+    previewImage(name) {
+      this.imgaePreviewShow = true
+      this.startPosition = name
     },
     // 加载更多数据
     moreLoad() {
@@ -316,10 +358,14 @@ export default {
         item.fileSize = this.$methods.transformByte(item.size)
         item.time = this.$methods.getTime(item.mod_time, 'YY-MM-DD hh:mm:ss')
         if (item.type === 0) {
-          item.icon = fileIconSrc.folder
+          item.icon = getFileIcon('folder')
         } else {
-          item.suffix = this.$methods.getFileType(item.name)
-          item.icon = fileIconSrc[item.suffix] || fileIconSrc.gho
+          if (item.thumbnail_url) {
+            item.poster = `/api/plugin/wangpan/${item.thumbnail_url}`
+          }
+          item.suffix = this.$methods.getSuffix(item.name)
+          item.icon = getFileIcon(item.suffix) || getFileIcon('gho')
+          item.fileType = getFileType(item.suffix)
         }
         // 判断是否加密文件
         if (item.is_encrypt === 1) {
@@ -477,13 +523,27 @@ export default {
   display: inline-block;
   width: 3rem;
 }
-.file-icon .van-image{
-  width: .52rem;
-  height: auto;
+.file-icon {
+  width: .72rem;
+  text-align: center;
+}
+.file-icon .poster {
+  position: relative;
+}
+.file-icon .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .file-icon >>> .van-image__img{
   width: .52rem;
   height: auto;
+}
+.file-icon .poster >>> .van-image__img{
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 0.08rem;
 }
 .file-operate{
   height: 100%;
@@ -500,4 +560,9 @@ export default {
   width: 0.32rem;
   height: 0.32rem;
 }
+</style>
+<style scoped>
+  .file-icon .poster >>> .van-image__error + .play-icon{
+    display: none;
+  }
 </style>

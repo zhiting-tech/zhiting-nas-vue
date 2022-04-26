@@ -15,6 +15,7 @@ import FolderSetting from './views/mine/folder-manage/setting.vue'
 import FolderEdit from './views/mine/folder-manage/edit.vue'
 import MemberAdd from './views/mine/folder-manage/member-add.vue'
 import AddPool from './views/mine/storage/add-pool.vue'
+import Preview from './views/preview/index.vue'
 
 Vue.use(Router)
 
@@ -38,7 +39,11 @@ export default new Router({
     {
       path: '/detail',
       name: 'detail',
-      component: Detail
+      component: Detail,
+      meta: {
+        keepAlive: true,
+        deepth: 2
+      }
     },
     {
       path: '/transmission',
@@ -99,6 +104,14 @@ export default new Router({
       path: '/mine/storage/add-pool',
       name: 'addPool',
       component: AddPool
+    },
+    {
+      path: '/preview',
+      name: 'preview',
+      component: Preview,
+      meta: {
+        deepth: 3
+      }
     }
   ]
 })

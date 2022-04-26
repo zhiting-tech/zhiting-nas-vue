@@ -36,7 +36,8 @@ export default {
         simultaneousUploads: 3,
         maxChunkRetries: 3,
         testChunks: true,
-        chunkSize: 2 * 1024 * 1024, // 分块大小2M 2 * 1024 * 1024
+        chunkSize: 8 * 1024 * 1024, // 分块大小2M 2 * 1024 * 1024
+        forceChunkSize: true,
         progressCallbacksInterval: 20, // 上传回调进度间隔时间
         checkChunkUploadedByResponse: (chunk, message) => {
           // 判断每个分块是否成功
@@ -58,7 +59,7 @@ export default {
           }
           obj.chunk_number = params.chunkNumber
           obj.total_size = params.totalSize
-          obj.chunk_size = params.chunkSize
+          obj.chunk_size = params.currentChunkSize
           obj.total_chunks = params.totalChunks
           obj.current_chunk_size = params.currentChunkSize
           obj.total_size = params.totalSize
@@ -225,7 +226,8 @@ export default {
         size: file.size,
         mod_time: Date.now() / 1000,
         type: 1,
-        path: file.path
+        path: file.path,
+        thumbnail_url: file.thumbnail_url
       }
       const list = JSON.parse(JSON.stringify(this.uploadedList))
       // 判断上传中的任务列表已存在文件
@@ -249,7 +251,7 @@ export default {
       const fileReader = new FileReader()
       const blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlicef
       let currentChunk = 0
-      const chunkSize = 2 * 1024 * 1024 // 分块大小2M
+      const chunkSize = 8 * 1024 * 1024 // 分块大小2M
       const chunks = Math.ceil(file.size / chunkSize) // 块数
       // 暂停上传 等待文件分块
       file.pause()
@@ -316,6 +318,11 @@ export default {
     this.uploader.off('filesAdded', this.onFilesAdded)
     this.uploader.off('fileSuccess', this.onFileSuccess)
     this.uploader.off('fileError', this.onFileError)
+  },
+  mounted() {
+    this.$EventBus.$on('removeFile', (file) => {
+      this.fileListRemove(file)
+    })
   }
 }
 </script>

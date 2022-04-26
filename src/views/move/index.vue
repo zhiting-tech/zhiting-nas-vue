@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { fileIconSrc } from '@/config/file-icon'
+import { getFileIcon } from '@/config/file-icon'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import PasswordVerify from '@/components/PasswordVerify.vue'
 import creatFile from '@/components/CreatFile.vue'
@@ -82,7 +82,7 @@ import creatFile from '@/components/CreatFile.vue'
 const empty = require('@/assets/empty-files.png')
 
 export default {
-  name: 'home',
+  name: 'move',
   components: {
     Breadcrumb,
     PasswordVerify,
@@ -111,14 +111,14 @@ export default {
           type: 0,
           name: this.$t('global.myFile'),
           path: '/',
-          icon: fileIconSrc.folder,
+          icon: getFileIcon('folder'),
           isShare: false
         },
         {
           type: 0,
           name: this.$t('global.sharedFile'),
           path: '/',
-          icon: fileIconSrc.foldershare,
+          icon: getFileIcon('foldershare'),
           isShare: true
         }
       ],
@@ -277,12 +277,12 @@ export default {
           this.isEncrypt = false
         }
         if (isPrivate) {
-          item.icon = fileIconSrc.folder
+          item.icon = getFileIcon('folder')
         } else if (item.name) {
-          item.icon = fileIconSrc.foldershare
+          item.icon = getFileIcon('foldershare')
         } else {
           item.name = this.userInfo.area_name
-          item.icon = fileIconSrc.folder
+          item.icon = getFileIcon('folder')
         }
         // 没有写权限不能操作
         if (item.write === 0) {

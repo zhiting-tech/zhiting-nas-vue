@@ -273,3 +273,11 @@ export const restartTask = (id, params) => http.u(
   `${apiHeader}/plugin/wangpan/tasks/${id}`,
   params
 )
+
+/**
+ * 获取预览文件
+ */
+export const preview = (id, params) => http.g(
+  `${apiHeader}/plugin/wangpan/preview/${id}`,
+  params
+)

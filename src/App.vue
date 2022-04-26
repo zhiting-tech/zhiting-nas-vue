@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <transition name="fade" mode="out-in">
-      <router-view/>
+      <keep-alive :include="include">
+        <router-view v-if="$route.meta.keepAlive"/>
+      </keep-alive>
+    </transition>
+    <transition name="fade" mode="out-in">
+      <router-view v-if="!$route.meta.keepAlive"/>
     </transition>
     <van-tabbar
       v-show="isShowNav"
@@ -42,6 +47,7 @@ export default {
   },
   data() {
     return {
+      include: [],
       active: 'home',
       navList: [
         {
@@ -80,11 +86,26 @@ export default {
     }
   },
   watch: {
-    $route(to) {
+    $route(to, from) {
       this.active = to.name
       // 登录拦截
       if (!Object.keys(this.scopeToken).length) {
         this.loginFilter()
+      }
+      // 如果要to(进入)的页面是需要keepAlive缓存的，把name push进include数组中
+      if (to.meta.keepAlive) {
+        if (!this.include.includes(to.name)) {
+          this.include.push(to.name)
+        }
+      }
+      // 如果 要 form(离开) 的页面是 keepAlive缓存的，
+      // 再根据 deepth 来判断是前进还是后退
+      // 如果是后退：
+      if (from.meta.keepAlive && (to.meta.deepth || 0) < (from.meta.deepth || 0)) {
+        const index = this.include.indexOf(from.name)
+        if (index !== -1) {
+          this.include.splice(index, 1)
+        }
       }
     }
   },

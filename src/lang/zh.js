@@ -13,6 +13,7 @@ export const global = {
   moving: '移动中',
   copyTo: '复制到',
   copying: '复制中',
+  check: '查看',
   rename: '重命名',
   delete: '删除',
   cancel: '取消',
